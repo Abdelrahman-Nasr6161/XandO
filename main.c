@@ -58,7 +58,7 @@ int main()
         mark = (player == 1) ? 'X' : 'O';
 
         insert(choice,mark,player);
-        i = checkwin();
+        i = isWinning();
 if (k!=1)
 {
         player++;
