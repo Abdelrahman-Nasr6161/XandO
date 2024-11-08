@@ -1,9 +1,9 @@
 #include <stdio.h>
 #include <conio.h>
+#include <stdlib.h>
 int k=0;
-char square[3][3] = {{'1', '2','3'} ,{'4', '5', '6'} ,{'7', '8', '9'}};
-insert(int choice,char mark,int player)
-{     k=0;
+void insertCH(int choice,char mark,char square[3][3])
+{    int k=0;
     if (choice == 1 && square[0][0] == '1')
             square[0][0] = mark;
 
@@ -44,12 +44,15 @@ void board();
 
 int main()
 {
+    while (1)
+    {
+    char square[3][3] = {{'1', '2','3'} ,{'4', '5', '6'} ,{'7', '8', '9'}};
     int player = 1, i, choice;
 
     char mark;
     do
     {
-        board();
+        board(square);
         player = (player % 2) ? 1 : 2;
 
         printf("Player %d, enter a number:  ", player);
@@ -57,29 +60,45 @@ int main()
 
         mark = (player == 1) ? 'X' : 'O';
 
-        insert(choice,mark,player);
-        i = isWinning();
+        insertCH(choice,mark,square);
+        i = isWinning(square);
 if (k!=1)
 {
         player++;
 }
     }while (i ==  - 1);
 
-    board();
+    board(square);
 
     if (i == 1)
-        printf("==>\aPlayer %d win ", --player);
+        {
+            printf("==>\aPlayer %d win ", --player);
+            printf("Play Again ? \n1) Yes \n2) No\n");
+            int operator;
+            scanf("%d",&operator);
+            if(operator == 1)
+            {
+                continue;
+            }
+            else
+            {
+                exit(0);
+            }
+        }
+
     else
         printf("==>\aGame draw");
 
     getch();
 
     return 0;
+    }
+    
 }
 
 
 
-int isWinning()
+int isWinning(char square[3][3])
 {
     if (square[0][0] == square[0][1] && square[0][1] == square[0][2])
         return 1;
@@ -118,7 +137,7 @@ int isWinning()
 
 
 
-void board()
+void board(char square[3][3])
 {
     system("cls");
     printf("\n\n\tTic Tac Toe\n\n");
