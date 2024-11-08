@@ -3,7 +3,7 @@
 #include <stdlib.h>
 int k=0;
 void insertCH(int choice,char mark,char square[3][3])
-{    int k=0;
+{   
     if (choice == 1 && square[0][0] == '1')
             square[0][0] = mark;
 
